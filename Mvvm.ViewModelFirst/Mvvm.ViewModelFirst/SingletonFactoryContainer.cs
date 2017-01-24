@@ -15,7 +15,7 @@ namespace MVMM.ViewModelFirst
 
         public object GetSingletonInstance()
         {
-            return _getInstanceMethod;
+            return _getInstanceMethod.Invoke();
         }
     }
 }
