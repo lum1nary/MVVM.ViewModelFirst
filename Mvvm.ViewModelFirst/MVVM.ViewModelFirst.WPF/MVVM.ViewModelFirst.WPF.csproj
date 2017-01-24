@@ -44,9 +44,9 @@
     <Compile Include="ViewManagerBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mvvm.ViewModelFirst\MVVM.ViewModelFirst.Core.csproj">
+    <ProjectReference Include="..\Mvvm.ViewModelFirst\MVVM.ViewModelFirst.csproj">
       <Project>{ca27b30c-3482-4e19-8fab-ad33cec0e989}</Project>
-      <Name>MVVM.ViewModelFirst.Core</Name>
+      <Name>MVVM.ViewModelFirst</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

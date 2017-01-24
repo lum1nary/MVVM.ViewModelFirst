@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.ViewModelFirst.Core", "Mvvm.ViewModelFirst\MVVM.ViewModelFirst.Core.csproj", "{CA27B30C-3482-4E19-8FAB-AD33CEC0E989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.ViewModelFirst", "MVVM.ViewModelFirst\MVVM.ViewModelFirst.csproj", "{CA27B30C-3482-4E19-8FAB-AD33CEC0E989}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.ViewModelFirst.WPF", "MVVM.ViewModelFirst.WPF\MVVM.ViewModelFirst.WPF.csproj", "{50BDBFF5-38F3-4B7D-BFCF-14282761AD7D}"
 EndProject
