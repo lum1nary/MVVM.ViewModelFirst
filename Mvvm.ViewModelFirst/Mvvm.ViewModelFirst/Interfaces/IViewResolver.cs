@@ -9,7 +9,7 @@
 
         IViewManager Resolve<TViewModel>(object dataContext);
 
-        IViewManager ResolveSingleton<TViewModel>();
+        IViewManager ResolveSingleton<TViewModel>(object dataContext);
 
         void Unregister<TViewModel>();
 

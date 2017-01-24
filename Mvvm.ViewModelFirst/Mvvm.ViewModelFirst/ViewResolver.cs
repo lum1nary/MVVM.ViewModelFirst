@@ -70,7 +70,7 @@ namespace MVMM.ViewModelFirst
             }
         }
 
-        public IViewManager ResolveSingleton<TViewModel>()
+        public IViewManager ResolveSingleton<TViewModel>(object dataContext)
         {
             lock (StaticSyncRoot)
             {
@@ -78,7 +78,7 @@ namespace MVMM.ViewModelFirst
                     throw new InvalidOperationException("Type is Not Registered");
 
                 var view = Activator.CreateInstance(StaticAssociations[typeof(TViewModel)]);
-                var instance = Activator.CreateInstance(_managerProtorype, view, SingletonMethodContainer[typeof(TViewModel)].GetSingletonInstance());
+                var instance = Activator.CreateInstance(_managerProtorype, view, dataContext);
                 return (IViewManager) instance;
             }
         }
