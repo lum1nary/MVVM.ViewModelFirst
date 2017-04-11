@@ -1,4 +1,4 @@
-﻿namespace MVMM.ViewModelFirst
+﻿namespace MVVM.ViewModelFirst
 {
     public interface IWindowViewModel
     {

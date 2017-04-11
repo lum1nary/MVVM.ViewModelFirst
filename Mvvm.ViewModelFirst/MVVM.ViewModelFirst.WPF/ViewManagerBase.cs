@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Data;
 using Microsoft.Win32;
-using MVMM.ViewModelFirst;
 
 namespace MVVM.ViewModelFirst.WPF
 {
@@ -156,6 +155,11 @@ namespace MVVM.ViewModelFirst.WPF
                 filepathes = new string[] { };
                 return false;
             }
+        }
+
+        public virtual bool? ShowDialog()
+        {
+           return Window.ShowDialog();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVMM.ViewModelFirst
+namespace MVVM.ViewModelFirst
 {
     public sealed class ViewModelLocator
     {

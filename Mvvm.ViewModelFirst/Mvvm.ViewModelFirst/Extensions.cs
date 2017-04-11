@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace MVMM.ViewModelFirst
+namespace MVVM.ViewModelFirst
 {
     public static class Extensions
     {

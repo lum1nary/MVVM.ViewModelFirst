@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVMM.ViewModelFirst
+namespace MVVM.ViewModelFirst
 {
     public class SingletonFactoryContainer<T> : ISingletonFactoryContainer where T : class
     {

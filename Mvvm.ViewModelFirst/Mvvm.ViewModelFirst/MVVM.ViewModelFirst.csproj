@@ -7,7 +7,7 @@
     <ProjectGuid>{CA27B30C-3482-4E19-8FAB-AD33CEC0E989}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVMM.ViewModelFirst</RootNamespace>
+    <RootNamespace>MVVM.ViewModelFirst</RootNamespace>
     <AssemblyName>MVVM.ViewModelFirst</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

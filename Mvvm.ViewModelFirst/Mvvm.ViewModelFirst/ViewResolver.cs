@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MVMM.ViewModelFirst
+namespace MVVM.ViewModelFirst
 {
     public sealed class ViewResolver : IViewResolver
     {

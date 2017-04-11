@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MVMM.ViewModelFirst
+namespace MVVM.ViewModelFirst
 {
     public interface IViewManager
     {
@@ -15,6 +15,8 @@ namespace MVMM.ViewModelFirst
         void Hide();
 
         void Show();
+
+        bool? ShowDialog();
 
         void Close();
 
