@@ -2,7 +2,6 @@
 {
     public interface IViewResolver
     {
-		//TODO RegisterSingleton and ResolveSingleton
         void Register<TViewModel, TView>();
 
         void RegisterSingleton<TViewModel, TView>(ISingletonFactoryContainer container);

@@ -7,6 +7,8 @@ namespace MVVM.ViewModelFirst.WPF
 {
     public abstract class ViewManagerBase : IViewManager
     {
+        public event EventHandler WindowClosed;
+
         public Window Window { get; }
 
         protected ViewManagerBase(Window window, object dataContext)
@@ -76,14 +78,12 @@ namespace MVVM.ViewModelFirst.WPF
             }
         }
 
-        public event EventHandler WindowClosed;
-
         public virtual void Close()
         {
             _isShowing = false;
             Application.Current.Dispatcher.BeginInvoke(new Action(() => Window.Close()));
 
-           EventArgs.Empty.Raise(this, ref WindowClosed);
+            EventArgs.Empty.Raise(this, ref WindowClosed);
         }
 
 
@@ -133,7 +133,6 @@ namespace MVVM.ViewModelFirst.WPF
                 filepath = string.Empty;
                 return false;
             }
-
         }
 
         public virtual bool ShowMultiOpenFileDialog(string caption, string filter, out string[] filepathes)
@@ -159,7 +158,7 @@ namespace MVVM.ViewModelFirst.WPF
 
         public virtual bool? ShowDialog()
         {
-           return Window.ShowDialog();
+            return Window.ShowDialog();
         }
     }
 }

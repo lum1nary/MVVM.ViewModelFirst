@@ -5,19 +5,10 @@ namespace MVVM.ViewModelFirst
 {
     public sealed class ViewResolver : IViewResolver
     {
-        private static readonly object StaticSyncRoot;
-        private static readonly Dictionary<Type, Type> StaticAssociations;
-        private static readonly Dictionary<Type, ISingletonFactoryContainer> SingletonMethodContainer;
-
-        static ViewResolver()
-        {
-            StaticAssociations = new Dictionary<Type, Type>();
-            SingletonMethodContainer = new Dictionary<Type, ISingletonFactoryContainer>();
-            StaticSyncRoot = new object();
-        }
-
-        private readonly Dictionary<Type, Type> _associations;
-        private readonly object _syncRoot;
+        private readonly Dictionary<Type, ISingletonFactoryContainer> _singletonMethodContainer;
+        private readonly Dictionary<Type, Type> _singletonAssociations = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> _associations = new Dictionary<Type, Type>();
+        private readonly object _syncRoot = new object();
         private readonly Type _managerProtorype;
 
         public ViewResolver(Type resolvePrototype)
@@ -26,8 +17,6 @@ namespace MVVM.ViewModelFirst
                 throw new InvalidOperationException("resolvePrototype is notimplements IViewManager");
 
             _managerProtorype = resolvePrototype;
-            _syncRoot = new object();
-            _associations = new Dictionary<Type, Type>();
         }
 
         public void Register<TViewModel, TView>()
@@ -57,30 +46,24 @@ namespace MVVM.ViewModelFirst
 
         public void RegisterSingleton<TViewModel, TView>(ISingletonFactoryContainer container)
         {
-            if(container == null)
+            if (container == null)
                 throw new ArgumentNullException(nameof(container));
 
-            lock (StaticSyncRoot)
-            {
-                if(StaticAssociations.ContainsKey(typeof(TViewModel)))
-                    throw new InvalidOperationException(typeof(TViewModel).Name + "is already registered");
-                
-                StaticAssociations.Add(typeof(TViewModel), typeof(TView));
-                SingletonMethodContainer.Add(typeof(TViewModel), container);
-            }
+            if (_singletonAssociations.ContainsKey(typeof(TViewModel)))
+                throw new InvalidOperationException(typeof(TViewModel).Name + "is already registered");
+
+            _singletonAssociations.Add(typeof(TViewModel), typeof(TView));
+            _singletonMethodContainer.Add(typeof(TViewModel), container);
         }
 
         public IViewManager ResolveSingleton<TViewModel>(object dataContext)
         {
-            lock (StaticSyncRoot)
-            {
-                if(!StaticAssociations.ContainsKey(typeof(TViewModel)))
-                    throw new InvalidOperationException("Type is Not Registered");
+            if (!_singletonAssociations.ContainsKey(typeof(TViewModel)))
+                throw new InvalidOperationException("Type is Not Registered");
 
-                var view = Activator.CreateInstance(StaticAssociations[typeof(TViewModel)]);
-                var instance = Activator.CreateInstance(_managerProtorype, view, dataContext);
-                return (IViewManager) instance;
-            }
+            var view = Activator.CreateInstance(_singletonAssociations[typeof(TViewModel)]);
+            var instance = Activator.CreateInstance(_managerProtorype, view, dataContext);
+            return (IViewManager)instance;
         }
 
         public void Unregister<TViewModel>()
@@ -93,22 +76,16 @@ namespace MVVM.ViewModelFirst
 
         public void UnregisterSingleton<TViewModel>()
         {
-            lock (StaticSyncRoot)
-            {
-                StaticAssociations.Remove(typeof(TViewModel));
-                SingletonMethodContainer.Remove(typeof(TViewModel));
-            }
+            _singletonAssociations.Remove(typeof(TViewModel));
+            _singletonMethodContainer.Remove(typeof(TViewModel));
         }
 
         public TViewModel GetSingletonViewModel<TViewModel>()
         {
-            lock (StaticSyncRoot)
-            {
-                if(!SingletonMethodContainer.ContainsKey(typeof(TViewModel)))
-                    throw new InvalidOperationException("Requested singleton is not registered");
+            if (!_singletonMethodContainer.ContainsKey(typeof(TViewModel)))
+                throw new InvalidOperationException("Requested singleton is not registered");
 
-                return (TViewModel)SingletonMethodContainer[typeof(TViewModel)].GetSingletonInstance();
-            }
+            return (TViewModel)_singletonMethodContainer[typeof(TViewModel)].GetSingletonInstance();
         }
     }
 }
